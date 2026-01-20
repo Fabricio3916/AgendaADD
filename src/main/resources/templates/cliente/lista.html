@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h2>Clientes cadastrados</h2>
+
+    <div class="actions">
+    <a th:href="@{/clientes/novo}" class="button button-primary">+ Novo Cliente</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Atendente</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.nome()}"></td>
+            <td th:text="${cliente.telefone()}"></td>
+            <td th:text="${cliente.atendente()}"></td>
+            <td>
+                <a th:href="@{clientes/editar/{id}(id=${cliente.id()})}"
+                   class="button-secondary button">Editar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

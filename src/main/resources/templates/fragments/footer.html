@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<footer th:fragment="footer" class="footer">
+    <p>
+        AgendaADD • Sistema interno • ©
+        <span th:text="${#dates.year(#dates.createNow())}"></span>
+    </p>
+</footer>
+
+</body>
+</html>

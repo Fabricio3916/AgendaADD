@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header th:fragment="header" class="header">
+    <div class="header-container">
+        <h1 class="logo">AgendaADD</h1>
+
+        <nav class="menu">
+            <a th:href="@{/clientes}">Clientes</a>
+            <a th:href="@{/atendimentos}">Atendimentos</a>
+        </nav>
+    </div>
+</header>
+
+</body>
+</html>
