@@ -16,6 +16,27 @@
     <a th:href="@{/clientes/novo}" class="button button-primary">+ Novo Cliente</a>
     </div>
 
+    <div class="actions">
+
+        <form th:action="@{/clientes}" method="get" style="display: flex; gap: 10px; align-items: center;">
+
+            <input type="text"
+                   name="nome"
+                   placeholder="Buscar por nome"
+                   th:value="${nome}">
+
+            <button type="submit" class="button button-secondary">
+                Buscar
+            </button>
+
+            <a th:href="@{/clientes}" class="button button-secondary">
+                Limpar
+            </a>
+
+        </form>
+
+    </div>
+
     <table>
         <thead>
         <tr>

@@ -61,6 +61,13 @@ h2 {
     margin-bottom: 20px;
 }
 
+/* BUSCA */
+.actions form input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
 
 /* TABELAS */
 table {
@@ -122,3 +129,17 @@ th {
     background-color: #e5e7eb;
     margin-top: 40px;
 }
+
+/* ERROS DE VALIDAÇÃO */
+.error {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+

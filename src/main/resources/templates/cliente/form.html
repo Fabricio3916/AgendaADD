@@ -18,17 +18,29 @@
 
         <div>
             <label>Nome</label><br>
-            <input type="text" th:field="*{nome}" required>
+            <input type="text" th:field="*{nome}">
+            <div class="error"
+                 th:if="${#fields.hasErrors('nome')}"
+                 th:errors="*{nome}">
+            </div>
         </div><br>
 
         <div>
             <label>Telefone</label><br>
-            <input type="text" th:field="*{telefone}" required>
+            <input type="text" th:field="*{telefone}">
+            <div class="error"
+                 th:if="${#fields.hasErrors('telefone')}"
+                 th:errors="*{telefone}">
+            </div>
         </div><br>
 
         <div>
             <label>Atendente</label><br>
-            <input type="text" th:field="*{atendente}" required>
+            <input type="text" th:field="*{atendente}">
+            <div class="error"
+                 th:if="${#fields.hasErrors('atendente')}"
+                 th:errors="*{atendente}">
+            </div>
         </div><br>
 
         <button type="submit" class="button">Salvar</button>

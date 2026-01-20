@@ -2,8 +2,10 @@ package add.agendaadd.controller;
 
 import add.agendaadd.dto.ClienteDTO;
 import add.agendaadd.service.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -16,12 +18,14 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-    // =========================
-    // LISTAGEM
-    // =========================
+
     @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("clientes", clienteService.listar());
+    public String listar(
+            @RequestParam(required = false) String nome,
+            Model model
+    ) {
+        model.addAttribute("clientes", clienteService.buscarPorNome(nome));
+        model.addAttribute("nome", nome);
         return "cliente/lista";
     }
 
@@ -39,7 +43,15 @@ public class ClienteController {
 
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute ClienteDTO clienteDTO) {
+    public String salvar(
+            @Valid @ModelAttribute("cliente") ClienteDTO clienteDTO,
+            BindingResult result,
+            Model model
+    ) {
+        if (result.hasErrors()) {
+            return "cliente/form";
+        }
+
         clienteService.salvar(clienteDTO);
         return "redirect:/clientes";
     }

@@ -42,6 +42,21 @@ public class ClienteService {
         return clienteMapper.toDTO(cliente);
     }
 
+    public List<ClienteDTO> buscarPorNome(String nome) {
+
+        List<Cliente> clientes;
+
+        if (nome == null || nome.isBlank()) {
+            clientes = clienteRepository.findAll();
+        } else {
+            clientes = clienteRepository.findByNomeContainingIgnoreCase(nome);
+        }
+
+        return clientes.stream()
+                .map(clienteMapper::toDTO)
+                .toList();
+    }
+
 
 
 }
