@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/atendimentos")
@@ -84,23 +85,27 @@ public class AtendimentoController {
     @GetMapping
     public String listarAtendimentos(
             @RequestParam(required = false) Long clienteId,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate dataInicio,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate dataFim,
             @RequestParam(defaultValue = "0") int page,
             Model model
     ) {
         Page<AtendimentoDTO> atendimentos =
-                atendimentoService.listarComFiltro(clienteId, dataInicio, dataFim, page);
+                atendimentoService.buscarComFiltro(clienteId, dataInicio, dataFim, page);
 
-        model.addAttribute("atendimentos", atendimentos);
-        model.addAttribute("clientes", clienteService.listar());
+        model.addAttribute("atendimentos", atendimentos); // ← Page, NÃO List
+
         model.addAttribute("clienteId", clienteId);
         model.addAttribute("dataInicio", dataInicio);
         model.addAttribute("dataFim", dataFim);
+        model.addAttribute("clientes", clienteService.listar());
 
         return "atendimento/lista";
     }
-
 
     private void carregarCombos(Model model) {
         model.addAttribute("clientes", clienteService.listar());

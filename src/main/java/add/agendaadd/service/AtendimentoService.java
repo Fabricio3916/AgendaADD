@@ -109,5 +109,33 @@ public class AtendimentoService {
         return resultado.map(atendimentoMapper::toDTO);
     }
 
+    public Page<AtendimentoDTO> buscarComFiltro(
+            Long clienteId,
+            LocalDate dataInicio,
+            LocalDate dataFim,
+            int page
+    ) {
+        Pageable pageable = PageRequest.of(
+                page,
+                30,
+                Sort.by(Sort.Direction.DESC, "dataCriacao")
+        );
+
+        LocalDateTime inicio = dataInicio != null
+                ? dataInicio.atStartOfDay()
+                : null;
+
+        LocalDateTime fim = dataFim != null
+                ? dataFim.atTime(23, 59, 59)
+                : null;
+
+        return atendimentoRepository.buscarComFiltro(
+                clienteId,
+                inicio,
+                fim,
+                pageable
+        ).map(atendimentoMapper::toDTO);
+    }
+
 
 }
