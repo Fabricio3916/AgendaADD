@@ -7,10 +7,14 @@ import add.agendaadd.exceptions.RegraNegocioException;
 import add.agendaadd.service.AtendimentoService;
 import add.agendaadd.service.ClienteService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/atendimentos")
@@ -23,12 +27,6 @@ public class AtendimentoController {
                                  ClienteService clienteService) {
         this.atendimentoService = atendimentoService;
         this.clienteService = clienteService;
-    }
-
-    @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("atendimentos", atendimentoService.listar());
-        return "atendimento/lista";
     }
 
     @GetMapping("/novo")
@@ -82,6 +80,27 @@ public class AtendimentoController {
 
         return "redirect:/atendimentos";
     }
+
+    @GetMapping
+    public String listarAtendimentos(
+            @RequestParam(required = false) Long clienteId,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
+            @RequestParam(defaultValue = "0") int page,
+            Model model
+    ) {
+        Page<AtendimentoDTO> atendimentos =
+                atendimentoService.listarComFiltro(clienteId, dataInicio, dataFim, page);
+
+        model.addAttribute("atendimentos", atendimentos);
+        model.addAttribute("clientes", clienteService.listar());
+        model.addAttribute("clienteId", clienteId);
+        model.addAttribute("dataInicio", dataInicio);
+        model.addAttribute("dataFim", dataFim);
+
+        return "atendimento/lista";
+    }
+
 
     private void carregarCombos(Model model) {
         model.addAttribute("clientes", clienteService.listar());

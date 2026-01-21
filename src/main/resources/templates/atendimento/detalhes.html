@@ -32,6 +32,21 @@
                   th:text="${atendimento.status()}">
             </span>
         </div>
+
+        <div>
+            <span class="label">Criado em</span>
+            <span th:text="${#temporals.format(atendimento.dataCriacao(),
+        'dd ''de'' MMMM ''de'' yyyy ''às'' HH:mm')}"></span>
+        </div>
+
+        <div>
+            <span class="label">Finalizado em</span>
+            <span th:text="${atendimento.dataFinalizacao() != null
+        ? #temporals.format(atendimento.dataFinalizacao(),
+            'dd ''de'' MMMM ''de'' yyyy ''às'' HH:mm')
+        : '—'}"></span>
+        </div>
+
     </div>
 
     <!-- PROBLEMA -->

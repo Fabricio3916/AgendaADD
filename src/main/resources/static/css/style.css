@@ -1,4 +1,6 @@
-/* RESET BÁSICO */
+/* =========================
+   RESET BÁSICO
+========================= */
 * {
     margin: 0;
     padding: 0;
@@ -6,13 +8,17 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* BODY */
+/* =========================
+   BODY
+========================= */
 body {
     background-color: #f4f6f8;
     color: #333;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 .header {
     background-color: #1f2937;
     padding: 15px 0;
@@ -29,6 +35,7 @@ body {
 .logo {
     color: #ffffff;
     font-size: 20px;
+    font-weight: bold;
 }
 
 .menu a {
@@ -42,34 +49,27 @@ body {
     text-decoration: underline;
 }
 
-/* CONTEÚDO */
+/* =========================
+   CONTAINER
+========================= */
 .container {
     width: 90%;
     margin: 30px auto;
     background-color: #ffffff;
-    padding: 20px;
+    padding: 24px;
     border-radius: 6px;
 }
 
-/* TÍTULOS */
+/* =========================
+   TÍTULOS
+========================= */
 h2 {
-    margin-bottom: 10px;
-}
-
-/* AÇÕES NO TOPO */
-.actions {
     margin-bottom: 20px;
 }
 
-/* BUSCA */
-.actions form input {
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-
-/* TABELAS */
+/* =========================
+   TABELAS
+========================= */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -80,13 +80,60 @@ th, td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
     text-align: left;
+    vertical-align: middle;
 }
 
 th {
     background-color: #f0f0f0;
 }
 
-/* BOTÕES / LINKS */
+
+/* =========================
+   FORMULÁRIOS
+========================= */
+.container form {
+    width: 100%;
+}
+
+.container form div {
+    margin-bottom: 16px;
+}
+
+.container form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.container form input,
+.container form select,
+.container form textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+
+
+/* =========================
+   TEXTAREA (CORREÇÃO REAL)
+========================= */
+.container form textarea {
+    min-height: 160px;          /* ← ESSENCIAL */
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.container form textarea.textarea-grande {
+    min-height: 220px;
+}
+
+/* =========================
+   BOTÕES
+========================= */
 .button {
     display: inline-block;
     padding: 8px 14px;
@@ -99,10 +146,6 @@ th {
     transition: background-color 0.2s ease;
 }
 
-.button:hover {
-    background-color: #1d4ed8;
-}
-
 .button-primary {
     background-color: #2563eb;
     color: #ffffff;
@@ -111,7 +154,6 @@ th {
 .button-primary:hover {
     background-color: #1d4ed8;
 }
-
 
 .button-secondary {
     background-color: #6b7280;
@@ -122,83 +164,30 @@ th {
     background-color: #4b5563;
 }
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #e5e7eb;
-    margin-top: 40px;
-}
-
-/* ERROS DE VALIDAÇÃO */
+/* =========================
+   ERROS DE VALIDAÇÃO
+========================= */
 .error {
-    color: #dc2626;
-    font-size: 13px;
     margin-top: 4px;
+    font-size: 13px;
+    color: #dc2626;
 }
 
-input {
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-
-
-.container form {
-    width: 100%;
-}
-
-.container form > div {
-    width: 100%;
-}
-
-
-form div {
-    width: 100%;
-}
-
-.bloco-texto {
-    background-color: #f9fafb;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #e5e7eb;
-    white-space: pre-wrap;
-}
-
-/* CAMPOS DE FORMULÁRIO */
-.container form label {
-    display: block;
-    margin-bottom: 4px;
-}
-
-.container form select,
-.container form input,
-.container form textarea {
-    display: block;
-    width: 100%;
-}
-
-.textarea-grande {
-    width: 100%;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    line-height: 1.5;
-    resize: vertical;
-}
-
-/* DETALHES DO ATENDIMENTO */
+/* =========================
+   DETALHES DO ATENDIMENTO
+========================= */
 .detalhes-atendimento h2 {
     margin-bottom: 20px;
 }
 
-/* RESUMO SUPERIOR */
 .detalhes-resumo {
     display: flex;
     gap: 40px;
     margin-bottom: 30px;
+}
+
+.detalhes-bloco {
+    margin-bottom: 20px;
 }
 
 .detalhes-resumo div {
@@ -209,16 +198,106 @@ form div {
 .detalhes-resumo .label {
     font-size: 12px;
     color: #6b7280;
+    font-weight: 600;
     margin-bottom: 4px;
+}
+
+/* =========================
+   BLOCOS DE TEXTO (DETALHES)
+========================= */
+.bloco-texto {
+    background-color: #f9fafb;
+    padding: 14px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    white-space: pre-wrap;
+}
+
+/* =========================
+   BADGES DE STATUS
+========================= */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-aberto {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.badge-em_andamento {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.badge-finalizado {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #e5e7eb;
+    margin-top: 40px;
+}
+
+/* =========================
+   ÁREA DE AÇÕES (LISTAGENS)
+========================= */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Inputs dentro de ações */
+.actions input,
+.actions select {
+    max-width: 300px;
+}
+
+.detalhes-resumo .label {
+    font-size: 12px;
+    color: #6b7280;
     font-weight: 600;
 }
 
-/* BLOCOS DE TEXTO */
-.detalhes-bloco {
-    margin-bottom: 30px;
+.detalhes-resumo span {
+    font-size: 14px;
 }
 
-.detalhes-bloco h3 {
-    margin-bottom: 8px;
-    font-size: 16px;
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.filtro-datas {
+    display: flex;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.filtro-datas div {
+    display: flex;
+    flex-direction: column;
+}
+
+.filtro-datas label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 4px;
 }

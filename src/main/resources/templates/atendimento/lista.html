@@ -18,6 +18,34 @@
         </a>
     </div>
 
+    <div class="actions">
+        <form method="get">
+            <select name="clienteId">
+                <option value="">Todos os clientes</option>
+                <option th:each="c : ${clientes}"
+                        th:value="${c.id()}"
+                        th:text="${c.nome()}"
+                        th:selected="${c.id() == clienteId}">
+                </option>
+            </select>
+
+            <div class="filtro-datas">
+                <div>
+                    <label>Data inicial</label>
+                    <input type="date" name="dataInicio" th:value="${dataInicio}">
+                </div>
+
+                <div>
+                    <label>Data final</label>
+                    <input type="date" name="dataFim" th:value="${dataFim}">
+                </div>
+            </div>
+
+            <button class="button button-primary">Filtrar</button>
+            <a href="/atendimentos" class="button button-secondary">Limpar</a>
+        </form>
+    </div>
+
     <table>
         <thead>
         <tr>
@@ -25,6 +53,7 @@
             <th>Técnico</th>
             <th>Status</th>
             <th>Problema</th>
+            <th>Data Abertura</th>
             <th>Ações</th>
         </tr>
         </thead>
@@ -39,6 +68,9 @@
                 </span>
             </td>
             <td th:text="${#strings.abbreviate(at.problemaRelatado(), 40)}"></td>
+            <td th:text="${at.dataCriacao() != null
+                 ? #temporals.format(at.dataCriacao(), 'dd/MM/yyyy HH:mm')
+                 : '-'}"></td>
             <td>
                 <a th:href="@{/atendimentos/detalhes/{id}(id=${at.id()})}"
                    class="button button-secondary">Detalhes</a>
@@ -49,6 +81,30 @@
         </tr>
         </tbody>
     </table>
+
+    <div class="pagination">
+        <a th:if="${atendimentos.hasPrevious()}"
+           th:href="@{/atendimentos(page=${atendimentos.number - 1},
+                                clienteId=${clienteId},
+                                dataInicio=${dataInicio},
+                                dataFim=${dataFim})}">
+            ◀ Anterior
+        </a>
+
+        <span>
+        Página <b th:text="${atendimentos.number + 1}"></b>
+        de <b th:text="${atendimentos.totalPages}"></b>
+    </span>
+
+        <a th:if="${atendimentos.hasNext()}"
+           th:href="@{/atendimentos(page=${atendimentos.number + 1},
+                                clienteId=${clienteId},
+                                dataInicio=${dataInicio},
+                                dataFim=${dataFim})}">
+            Próxima ▶
+        </a>
+    </div>
+
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
