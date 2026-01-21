@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Atendimento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container detalhes-atendimento">
+
+    <h2>Detalhes do Atendimento</h2>
+
+    <!-- RESUMO -->
+    <div class="detalhes-resumo">
+        <div>
+            <span class="label">Cliente</span>
+            <span th:text="${atendimento.clienteNome()}"></span>
+        </div>
+
+        <div>
+            <span class="label">Técnico</span>
+            <span th:text="${atendimento.tecnico().nome}"></span>
+        </div>
+
+        <div>
+            <span class="label">Status</span>
+            <span class="badge"
+                  th:classappend="' badge-' + ${#strings.toLowerCase(atendimento.status().name())}"
+                  th:text="${atendimento.status()}">
+            </span>
+        </div>
+    </div>
+
+    <!-- PROBLEMA -->
+    <div class="detalhes-bloco">
+        <h3>Problema Relatado</h3>
+        <div class="bloco-texto"
+             th:text="${atendimento.problemaRelatado()}"></div>
+    </div>
+
+    <!-- SOLUÇÃO -->
+    <div class="detalhes-bloco"
+         th:if="${atendimento.descricaoSolucao() != null}">
+        <h3>Solução Aplicada</h3>
+        <div class="bloco-texto"
+             th:text="${atendimento.descricaoSolucao()}"></div>
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="actions">
+        <a th:href="@{/atendimentos}"
+           class="button button-secondary">Voltar</a>
+
+        <a th:href="@{/atendimentos/editar/{id}(id=${atendimento.id()})}"
+           class="button button-primary">Editar</a>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

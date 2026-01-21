@@ -143,3 +143,82 @@ input {
     border: 1px solid #ccc;
 }
 
+
+
+.container form {
+    width: 100%;
+}
+
+.container form > div {
+    width: 100%;
+}
+
+
+form div {
+    width: 100%;
+}
+
+.bloco-texto {
+    background-color: #f9fafb;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    white-space: pre-wrap;
+}
+
+/* CAMPOS DE FORMULÁRIO */
+.container form label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.container form select,
+.container form input,
+.container form textarea {
+    display: block;
+    width: 100%;
+}
+
+.textarea-grande {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+/* DETALHES DO ATENDIMENTO */
+.detalhes-atendimento h2 {
+    margin-bottom: 20px;
+}
+
+/* RESUMO SUPERIOR */
+.detalhes-resumo {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.detalhes-resumo div {
+    display: flex;
+    flex-direction: column;
+}
+
+.detalhes-resumo .label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+/* BLOCOS DE TEXTO */
+.detalhes-bloco {
+    margin-bottom: 30px;
+}
+
+.detalhes-bloco h3 {
+    margin-bottom: 8px;
+    font-size: 16px;
+}

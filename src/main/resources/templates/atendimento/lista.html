@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Atendimentos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h2>Atendimentos</h2>
+
+    <div class="actions">
+        <a th:href="@{/atendimentos/novo}" class="button button-primary">
+            + Novo Atendimento
+        </a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Técnico</th>
+            <th>Status</th>
+            <th>Problema</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="at : ${atendimentos}">
+            <td th:text="${at.clienteNome()}"></td>
+            <td th:text="${at.tecnico().nome}"></td>
+            <td>
+                <span class="badge"
+                    th:classappend="' badge-' + ${#strings.toLowerCase(at.status().name())}"
+                     th:text="${at.status()}">
+                </span>
+            </td>
+            <td th:text="${#strings.abbreviate(at.problemaRelatado(), 40)}"></td>
+            <td>
+                <a th:href="@{/atendimentos/detalhes/{id}(id=${at.id()})}"
+                   class="button button-secondary">Detalhes</a>
+
+                <a th:href="@{/atendimentos/editar/{id}(id=${at.id()})}"
+                   class="button button-secondary">Editar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

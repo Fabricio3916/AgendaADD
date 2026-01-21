@@ -25,7 +25,11 @@ public class Atendimento {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    private String descricao;
+    @Column(name = "problema_relatado", length = 500, nullable = false)
+    private String problemaRelatado;
+
+    @Column(name = "descricao_solucao", length = 1000)
+    private String descricaoSolucao;
 
     @Enumerated(EnumType.STRING)
     private Status  status;

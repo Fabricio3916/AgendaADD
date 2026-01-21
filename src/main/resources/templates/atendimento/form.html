@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Atendimento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h2>Atendimento</h2>
+
+    <form th:action="@{/atendimentos/salvar}"
+          th:object="${atendimento}"
+          method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        <!-- CLIENTE -->
+        <div>
+            <label>Cliente</label><br>
+            <select th:field="*{clienteId}">
+                <option value="">Selecione</option>
+                <option th:each="c : ${clientes}"
+                        th:value="${c.id()}"
+                        th:text="${c.nome()}">
+                </option>
+            </select>
+            <div class="error" th:errors="*{clienteId}"></div>
+        </div><br>
+
+        <!-- TÉCNICO -->
+        <div>
+            <label>Técnico</label><br>
+            <select th:field="*{tecnico}">
+                <option value="">Selecione</option>
+                <option th:each="t : ${tecnicos}"
+                        th:value="${t}"
+                        th:text="${t.nome}">
+                </option>
+            </select>
+            <div class="error" th:errors="*{tecnico}"></div>
+        </div><br>
+
+        <!-- STATUS -->
+        <div>
+            <label>Status</label><br>
+
+            <!-- NOVO ATENDIMENTO -->
+            <select th:if="${atendimento.id() == null}"
+                    th:field="*{status}" disabled>
+                <option th:value="ABERTO">ABERTO</option>
+            </select>
+
+            <input type="hidden"
+                   th:if="${atendimento.id() == null}"
+                   th:field="*{status}" />
+
+            <!-- EDIÇÃO -->
+            <select th:if="${atendimento.id() != null}"
+                    th:field="*{status}">
+                <option th:each="s : ${statusList}"
+                        th:value="${s}"
+                        th:text="${s}">
+                </option>
+            </select>
+
+        </div><br>
+
+        <div>
+            <label>Problema Relatado</label>
+            <textarea th:field="*{problemaRelatado}"
+                      class="textarea-grande"
+                      rows="6"></textarea>
+            <div class="error" th:errors="*{problemaRelatado}"></div>
+        </div>
+
+        <!-- SOLUÇÃO (só edição) -->
+        <div th:if="${atendimento.id() != null}">
+            <label>Descrição da Solução</label>
+            <textarea th:field="*{descricaoSolucao}"
+                      class="textarea-grande"
+                      rows="8"></textarea>
+            <div class="error" th:errors="*{descricaoSolucao}"></div>
+        </div>
+
+        <button type="submit" class="button button-primary">Salvar</button>
+        <a th:href="@{/atendimentos}" class="button button-secondary">Cancelar</a>
+
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
